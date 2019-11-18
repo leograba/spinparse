@@ -14,8 +14,9 @@ args = parser.parse_args()
 
 try:
     # Only works for a very specific use case
-    dfs = pd.read_html(args.input, skiprows=3)
-    grossval = dfs[0].iloc[0 , 3]/100
+    dfs = pd.read_html(args.input, skiprows=1)
+    investment = dfs[0].iloc[0 , 0]
+    grossval = dfs[0].iloc[2 , 3]/100
 except FileNotFoundError as e:
     print("Input file error: " + repr(e))
 else:
@@ -31,6 +32,8 @@ else:
     except FileExistsError:
         pass # Do nothing if path already exists
 
-    data2csv = pd.DataFrame({'year': [yyyy], 'month': [mm], 'gross-value': [grossval]})
+    data2csv = pd.DataFrame(
+        {'year': [yyyy], 'month': [mm], 'gross-value': [grossval],
+        'investment': [investment]})
     print(data2csv)
     data2csv.to_csv(os.path.join(fpath, 'parsed', fname.split(".")[0] + ".csv"), index=False)
