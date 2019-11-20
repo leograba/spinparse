@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import pandas as pd
-import argparse
 import os
 
 class TesouroDireto():
@@ -79,18 +78,14 @@ class TesouroDireto():
 
 
 if __name__ == "__main__":
-    import argparse
+    from spinparse.common.cmdline_parse import CmdlineParse
 
     # Parse input filename
-    parser = argparse.ArgumentParser(description =  'Parse data from tesouro '
-                                                    'direto XLS file.')
-    parser.add_argument('-i', '--input', metavar='<yyyy-mm>.xls', type=str,
-                    required = True, help='File downloaded from the Tesouro '
-                    'Direto website. Must have the name provided as year-month')
-    parser.add_argument('-o', '--outpath', metavar='/path/to/output/dir',
-                    type=str, help='Path to directory where subdir "parsed" '
-                    'will be created and the parsed files put inside it')
-    args = parser.parse_args()
+    desc = "Parse data from tesouro direto XLS file"
+    ftype = "<yyyy-mm>.xls"
+    help_msg = ('File downloaded from the Tesouro Direto website, must have '
+                'the name provided as <year-month>.xls')
+    args = CmdlineParse(desc, ftype, help_msg)
 
     # Generate csv file
     td = TesouroDireto()
