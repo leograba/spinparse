@@ -1,0 +1,9 @@
+{
+    "rootdir" : "/full/path/to/root/investments/directory",
+    "investments" : [
+        {"type": "Investment Type 1",
+        "path": "relative/path/from/rootdir/to/investment/type1"},
+        {"type": "Investment Type 2",
+        "path": "relative/path/from/rootdir/to/investment/type2"}
+    ]
+}
